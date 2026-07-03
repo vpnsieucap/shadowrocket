@@ -12,7 +12,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #0b1120; /* Tối màu hơn để làm nổi hiệu ứng kính */
+            background-color: #0b1120;
             color: #e2e8f0;
             min-height: 100vh;
             margin: 0;
@@ -30,7 +30,6 @@
             overflow-x: hidden;
         }
 
-        /* Nâng cấp Cyber Card: Hiệu ứng kính sâu hơn, viền sáng */
         .cyber-card {
             background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
             border: 1px solid rgba(148, 163, 184, 0.1);
@@ -174,8 +173,10 @@
                     </div>
 
                     <a href="https://i.ibb.co/DfFTb70L/IMG-1940.jpg" target="_blank" class="block mt-1 rounded-xl overflow-hidden border border-slate-700/60 hover:border-rose-400/50 transition-all duration-300 relative shadow-inner group/img">
-                        <div class="absolute inset-0 bg-black/20 group-hover/img:bg-transparent transition-colors z-10"></div>
-                        <img src="https://i.ibb.co/DfFTb70L/IMG-1940.jpg" alt="Hướng dẫn" class="w-full h-auto object-cover transform group-hover/img:scale-105 transition-transform duration-700 ease-out">
+                        <!-- Đã xóa bg-black/20 gây tối ảnh ở đây -->
+                        <!-- Đã thêm brightness-110 contrast-105 để làm ảnh sáng và rõ nét hơn -->
+                        <img src="https://i.ibb.co/DfFTb70L/IMG-1940.jpg" alt="Hướng dẫn" class="w-full h-auto object-cover transform group-hover/img:scale-105 transition-transform duration-700 ease-out brightness-110 contrast-105">
+                        
                         <div class="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300">
                             <span class="bg-black/70 text-white text-[11px] uppercase tracking-wider font-semibold px-4 py-2 rounded-full backdrop-blur-md border border-white/20 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
                                 <i class="fa-solid fa-expand mr-1.5"></i>Xem ảnh lớn
