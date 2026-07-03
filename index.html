@@ -146,27 +146,27 @@
     </div>
 
     <script>
-        // ⚠️ ĐƯỜNG DẪN THẲNG TỚI FILE TEXT TRÊN GITHUB
-const SHEET_URL = './accounts.txt';
+                // ⚠️ LINK GOOGLE SHEETS CHUẨN CỦA BẠN ĐÂY:
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1-u_rhnqfke5TqsvNoUa5xirj6qgM6OSq6JGMDPA91ow/export?format=csv';
 
-async function loadAccounts() {
-    const container = document.getElementById('accountList');
-    const refreshIcon = document.getElementById('refresh-icon');
-    refreshIcon.classList.add('fa-spin'); 
-    
-    try {
-        // Đã sửa lại chỗ này để nhận diện file accounts.txt mượt mà
-        if(SHEET_URL.trim() === '') {
-            setTimeout(() => {
-                renderMockData();
-                refreshIcon.classList.remove('fa-spin');
-            }, 800);
-            return;
-        }
-
+        async function loadAccounts() {
+            const container = document.getElementById('accountList');
+            const refreshIcon = document.getElementById('refresh-icon');
+            refreshIcon.classList.add('fa-spin'); 
+            
+            try {
+                // Đã xóa phần bắt lỗi cũ, giờ code sẽ chạy thẳng luôn
+                if(SHEET_URL.trim() === '') {
+                    setTimeout(() => {
+                        renderMockData();
+                        refreshIcon.classList.remove('fa-spin');
+                    }, 800);
+                    return;
+                }
 
                 const response = await fetch(SHEET_URL);
                 const csvData = await response.text();
+
                 
                 Papa.parse(csvData, {
                     header: true,
