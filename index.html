@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VPN Siêu Cấp - vpnsieucap.shop</title>
-    <!-- Tailwind CSS để tạo giao diện nhanh -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome cho các icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -35,13 +32,10 @@
 </head>
 <body class="text-gray-800 antialiased selection:bg-purple-200">
 
-    <!-- Container giới hạn chiều rộng để giống giao diện mobile -->
     <div class="max-w-md mx-auto relative pt-6 px-5 pb-20 min-h-screen flex flex-col">
 
-        <!-- Header -->
         <header class="flex justify-between items-center mb-10">
             <div class="flex items-center gap-3">
-                <!-- Logo -->
                 <div class="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center text-white shadow-lg">
                     <i class="fa-solid fa-shield-halved text-2xl"></i>
                 </div>
@@ -54,14 +48,12 @@
                 </div>
             </div>
             
-            <!-- Nút Hướng dẫn -->
             <button class="glass-panel px-4 py-2.5 rounded-full flex items-center gap-2 hover:bg-white/60 transition shadow-sm text-sm font-semibold text-gray-700">
                 <i class="fa-solid fa-book-open text-blue-500"></i>
                 Hướng dẫn
             </button>
         </header>
 
-        <!-- Main Title Area -->
         <div class="text-center mb-6">
             <span class="inline-block bg-white/70 text-blue-600 text-xs font-bold px-4 py-1.5 rounded-full tracking-wider shadow-sm mb-4">
                 PREMIUM ACCOUNTS
@@ -69,9 +61,7 @@
             <h2 class="text-4xl font-extrabold text-gradient tracking-tight">VPN Siêu Cấp</h2>
         </div>
 
-        <!-- Info Card -->
         <div class="glass-panel rounded-3xl p-6 mb-8 shadow-sm text-center relative overflow-hidden">
-            <!-- Hiệu ứng ánh sáng nhỏ trong thẻ -->
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white to-transparent opacity-50"></div>
             
             <p class="text-gray-600 text-sm font-medium mb-1 uppercase tracking-wide">Hệ thống VPN Chất lượng</p>
@@ -80,37 +70,112 @@
             <div class="flex justify-center items-center gap-6 text-sm text-gray-500 font-medium">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-rotate text-blue-400"></i>
-                    <span>Auto Update: <span class="text-gray-700">10s</span></span>
+                    <span>Auto Update: <span class="text-gray-700">30m</span></span>
                 </div>
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-users text-purple-400"></i>
-                    <span>Total: <span class="text-gray-700">0</span></span>
+                    <span>Total: <span id="total-accs" class="text-gray-700 font-bold">2</span></span>
                 </div>
             </div>
         </div>
 
-        <!-- Search Bar -->
-        <div class="bg-white rounded-2xl p-2 flex items-center shadow-md shadow-purple-900/5 mb-16 border border-gray-100">
+        <div class="bg-white rounded-2xl p-2 flex items-center shadow-md shadow-purple-900/5 mb-6 border border-gray-100">
             <div class="pl-4 pr-3 text-gray-400">
                 <i class="fa-solid fa-magnifying-glass text-lg"></i>
             </div>
-            <input type="text" placeholder="Tìm kiếm quốc gia, server..." class="flex-1 bg-transparent border-none outline-none text-gray-700 placeholder-gray-400 font-medium py-3">
-            <button class="w-12 h-12 bg-gray-50 hover:bg-gray-100 rounded-xl flex items-center justify-center text-gray-500 transition border border-gray-100">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm quốc gia, server..." class="flex-1 bg-transparent border-none outline-none text-gray-700 placeholder-gray-400 font-medium py-3">
+            <button onclick="window.location.reload();" class="w-12 h-12 bg-gray-50 hover:bg-gray-100 rounded-xl flex items-center justify-center text-gray-500 transition border border-gray-100">
                 <i class="fa-solid fa-rotate"></i>
             </button>
         </div>
 
-        <!-- Empty State (Chưa có dữ liệu) -->
-        <div class="flex-1 flex flex-col items-center justify-center mt-4">
-            <!-- Icon Ghost giống ảnh -->
-            <div class="w-20 h-20 bg-white/60 rounded-3xl flex items-center justify-center shadow-sm mb-4 border border-white">
-                <i class="fa-solid fa-ghost text-4xl text-gray-300"></i>
+        <div id="accountList" class="flex flex-col gap-4 mt-2 mb-10">
+            
+            <div class="account-card bg-white/80 backdrop-blur-md rounded-2xl p-4 shadow-sm border border-white relative overflow-hidden transition-all duration-300">
+                <div class="flex justify-between items-center mb-3 border-b border-gray-100 pb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">🇺🇸</span>
+                        <span class="font-bold text-gray-800 text-sm server-name">Server USA - Premium</span>
+                    </div>
+                    <span class="bg-green-100 text-green-600 text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wide">Sống</span>
+                </div>
+                
+                <div class="flex justify-between items-center mb-2 bg-gray-50/50 p-2.5 rounded-xl border border-gray-100">
+                    <div class="overflow-hidden">
+                        <p class="text-[11px] text-gray-500 font-medium mb-0.5 uppercase tracking-wider">Tài khoản / Email</p>
+                        <p class="text-gray-800 font-semibold text-sm truncate">usa_free01@vpnsieucap.shop</p>
+                    </div>
+                    <button onclick="navigator.clipboard.writeText('usa_free01@vpnsieucap.shop'); alert('Đã copy Tài khoản USA!');" class="min-w-[32px] h-8 flex items-center justify-center text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition ml-2">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+
+                <div class="flex justify-between items-center bg-gray-50/50 p-2.5 rounded-xl border border-gray-100">
+                    <div class="overflow-hidden">
+                        <p class="text-[11px] text-gray-500 font-medium mb-0.5 uppercase tracking-wider">Mật khẩu</p>
+                        <p class="text-gray-800 font-semibold text-sm truncate">SieuCapUsa2026</p>
+                    </div>
+                    <button onclick="navigator.clipboard.writeText('SieuCapUsa2026'); alert('Đã copy Mật khẩu USA!');" class="min-w-[32px] h-8 flex items-center justify-center text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition ml-2">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
             </div>
-            <h3 class="text-xl font-bold text-gray-800 mb-2">Chưa có dữ liệu</h3>
-            <p class="text-gray-500 text-sm text-center px-8">Hệ thống đang cập nhật hoặc kết nối gián đoạn. Vui lòng thử lại sau.</p>
+
+            <div class="account-card bg-white/80 backdrop-blur-md rounded-2xl p-4 shadow-sm border border-white relative overflow-hidden transition-all duration-300">
+                <div class="flex justify-between items-center mb-3 border-b border-gray-100 pb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">🇻🇳</span>
+                        <span class="font-bold text-gray-800 text-sm server-name">Việt Nam</span>
+                    </div>
+                    <span class="bg-green-100 text-green-600 text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wide">Sống</span>
+                </div>
+                
+                <div class="flex justify-between items-center mb-2 bg-gray-50/50 p-2.5 rounded-xl border border-gray-100">
+                    <div class="overflow-hidden">
+                        <p class="text-[11px] text-gray-500 font-medium mb-0.5 uppercase tracking-wider">Tài khoản / Email</p>
+                        <p class="text-gray-800 font-semibold text-sm truncate">vpnsieucap.shop@gmail.com</p>
+                    </div>
+                    <button onclick="navigator.clipboard.writeText('vpnsieucap.shop@gmail.com'); alert('Đã copy Tài khoản Việt Nam!');" class="min-w-[32px] h-8 flex items-center justify-center text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition ml-2">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+
+                <div class="flex justify-between items-center bg-gray-50/50 p-2.5 rounded-xl border border-gray-100">
+                    <div class="overflow-hidden">
+                        <p class="text-[11px] text-gray-500 font-medium mb-0.5 uppercase tracking-wider">Mật khẩu</p>
+                        <p class="text-gray-800 font-semibold text-sm truncate">Pfhechscw134@</p>
+                    </div>
+                    <button onclick="navigator.clipboard.writeText('SgVipPro999'); alert('Đã copy Mật khẩu Việt Nam!');" class="min-w-[32px] h-8 flex items-center justify-center text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition ml-2">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
         </div>
 
     </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.querySelectorAll('.account-card');
+        const totalAccsLabel = document.getElementById('total-accs');
+
+        // Tự động đếm tổng số acc dựa theo số lượng thẻ đang có trên giao diện
+        totalAccsLabel.textContent = cards.length;
+
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase().trim();
+
+            cards.forEach(card => {
+                const serverName = card.querySelector('.server-name').textContent.toLowerCase();
+                if (serverName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
