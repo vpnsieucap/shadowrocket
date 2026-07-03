@@ -153,8 +153,8 @@
                         <i class="fa-solid fa-clock-rotate-left text-xl drop-shadow-md"></i>
                     </div>
                     <div>
-                        <p class="text-[11px] text-gray-400 uppercase tracking-widest mb-0.5 font-medium">Thời gian Reset Acc</p>
-                        <p class="text-[15px] font-bold text-white tracking-wide">9h Tối <span class="text-gray-500 font-normal mx-0.5">&</span> 12h Trưa <span class="text-[11px] font-semibold text-blue-400 ml-1 bg-blue-500/10 px-1.5 py-0.5 rounded border border-blue-500/20">Mỗi ngày</span></p>
+                        <p class="text-[11px] text-gray-400 uppercase tracking-widest mb-0.5 font-medium">Thời gian chuẩn Việt Nam</p>
+                        <p class="text-[15px] font-bold text-white tracking-wide" id="vn-clock">Đang tải...</p>
                     </div>
                 </div>
             </div>
@@ -269,6 +269,7 @@
                             const status = row.Status || 'Active';
                             const email = row.Email || '';
                             const password = row.Password || '';
+                            const updatedTime = row.Updated || row['Updated'] || row['Thời gian'] || 'Chưa cập nhật';
                             const statusColor = status.toLowerCase().includes('die') || status.toLowerCase().includes('lỗi') || status.toLowerCase().includes('bảo trì') 
                                 ? 'text-rose-400 bg-rose-500/10 border-rose-400/30 shadow-[0_0_15px_rgba(244,63,94,0.2)]' 
                                 : 'text-emerald-400 bg-emerald-500/10 border-emerald-400/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]';
@@ -307,6 +308,15 @@
                                             <button onclick="copyText('${password}', this)" class="copy-btn w-10 h-10 rounded-xl flex justify-center items-center shrink-0">
                                                 <i class="fa-regular fa-copy text-sm"></i>
                                             </button>
+                                        </div>
+                                        <div class="group flex items-center justify-between bg-slate-900/50 border border-slate-700/50 p-3.5 rounded-xl hover:bg-slate-800/80 hover:border-slate-500/80 transition-all duration-300 shadow-[inset_0_1px_3px_rgba(0,0,0,0.2)]">
+                                            <div class="overflow-hidden mr-2">
+                                                <p class="text-[11px] text-gray-500 mb-0.5 font-medium">Cập nhật lúc</p>
+                                                <p class="text-gray-400 text-sm font-semibold truncate tracking-wide">${updatedTime}</p>
+                                            </div>
+                                            <div class="w-10 h-10 rounded-xl flex justify-center items-center shrink-0 text-gray-500">
+                                                <i class="fa-regular fa-clock text-sm"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -387,6 +397,15 @@
                                 <i class="fa-regular fa-copy text-sm"></i>
                             </button>
                         </div>
+                        <div class="group flex items-center justify-between bg-slate-900/50 border border-slate-700/50 p-3.5 rounded-xl hover:bg-slate-800/80 hover:border-slate-500/80 transition-all duration-300 shadow-[inset_0_1px_3px_rgba(0,0,0,0.2)]">
+                            <div class="overflow-hidden mr-2">
+                                <p class="text-[11px] text-gray-500 mb-0.5 font-medium">Cập nhật lúc</p>
+                                <p class="text-gray-400 text-sm font-semibold truncate tracking-wide">Chưa cập nhật</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-xl flex justify-center items-center shrink-0 text-gray-500">
+                                <i class="fa-regular fa-clock text-sm"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
@@ -406,7 +425,27 @@
             });
         }
 
-        window.onload = loadAccounts;
+        function startVietnamClock() {
+            setInterval(() => {
+                const now = new Date();
+                const options = { 
+                    timeZone: 'Asia/Ho_Chi_Minh', 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit', 
+                    day: '2-digit', 
+                    month: '2-digit', 
+                    year: 'numeric',
+                    hour12: false 
+                };
+                document.getElementById('vn-clock').textContent = now.toLocaleString('vi-VN', options);
+            }, 1000);
+        }
+
+        window.onload = function() {
+            loadAccounts();
+            startVietnamClock();
+        };
     </script>
 </body>
 </html>
